@@ -10,7 +10,7 @@ const page = () => {
       <img src='/images/logo1.png' alt='logo' className='w-96 max-md:w-20 mx-auto' />
 
       <p className="mt-4 font-extrabold uppercase text-black text-2xl ">
-      Tidak lagi ketinggalan event dan film favoritmu
+      Daftarkan kegiatan event dan film karyamu disini!!
       </p>
     </div>
 

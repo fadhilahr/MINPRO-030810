@@ -27,7 +27,7 @@ export const Header = () => {
 
                 <li>
                   <a
-                    className="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
+                    className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     href="/"
                   >
                     Create Event
@@ -36,7 +36,7 @@ export const Header = () => {
 
                 <li>
                   <a
-                    className="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
+                    className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     href="/"
                   >
                     About Us

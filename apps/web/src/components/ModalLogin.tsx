@@ -1,5 +1,8 @@
 import React from 'react'
 
+import {  cilGroup, cilUserFollow } from '@coreui/icons';
+import CIcon from '@coreui/icons-react';
+
 const ModalLogin = () => {
   return (
     <div>
@@ -35,10 +38,12 @@ const ModalLogin = () => {
     
   </div>
 
-  <ul className="mt-4 space-y-2">
+<ul className="mt-4 space-y-2">
     <li>
       <a href="/login.user" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
         <strong className="font-medium text-2xl text-white">Log-In as Costumers </strong>
+        <CIcon icon={cilUserFollow} size="xl"/>
+
 
        
       </a>
@@ -47,6 +52,7 @@ const ModalLogin = () => {
     <li>
       <a href="/login.organizer" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
         <strong className="font-medium text-2xl text-white">Log-In as Administration </strong>
+        <CIcon icon={cilGroup} size="xl"/>
 
        
       </a>
