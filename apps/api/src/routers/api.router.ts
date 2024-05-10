@@ -1,31 +1,36 @@
-import { Router } from "express";
-import { UserRouter } from "./user.router";
-import { SampleRouter } from "./sample.router";
-import { EventRouter } from "./event.router";
+import {Request, Response, Router} from 'express'
+import { UserRouter } from './UserRouter'
+import { VerifyToken } from '@/middleware/token.middleware'
+import { OrganizerRouter } from './OrganizerRouter'
+import { AccountRouter } from './EventRouter'
 
 export class ApiRouter {
-    private userRouter : UserRouter;
-    private sampleRouter : SampleRouter;
-    private eventRouter : EventRouter
-    private router : Router
+    private userRouter: UserRouter 
+    private organizerRouter: OrganizerRouter
+    private accountRouter: AccountRouter
+    private router: Router
 
-    constructor () {
+    constructor() {
         this.router = Router()
         this.userRouter = new UserRouter()
-        this.sampleRouter = new SampleRouter()
-        this.eventRouter = new EventRouter()
-        this.initializeRoutes()
+        this.organizerRouter = new OrganizerRouter()
+        this.accountRouter = new AccountRouter()
+        this.initializeRoutes();
     }
 
-    private initializeRoutes() : void {
-        this.router.use('/users' , this.userRouter.getRouter())
-        this.router.use('/samples', this.sampleRouter.getRouter())
-        this.router.use('/events' , this.eventRouter.getRouter())
-
+    private initializeRoutes(): void {
+        this.router.get('/', (req:Request, res: Response) => {
+            res.status(200).send({
+                status: 'ok',
+                message: 'test API'
+            })
+        })
+        this.router.use('/users', this.userRouter.getRouter())
+        this.router.use('/organizers', this.organizerRouter.getRouter())
+        this.router.use('/accounts', this.accountRouter.getRouter())
     }
-    getRouter () {
+
+    getRouter(): Router {
         return this.router
     }
-
-
 }
