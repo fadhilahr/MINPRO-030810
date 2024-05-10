@@ -62,6 +62,8 @@ model Organizer {
 model Event {
   id            Int             @id @default(autoincrement())
   name          String
+  startSale     DateTime        @default(now())
+  eventDate     DateTime        @default(now())
   organizerId   Int
   date          DateTime        @default(now())
   price         Int

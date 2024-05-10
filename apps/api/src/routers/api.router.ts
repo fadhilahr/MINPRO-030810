@@ -23,7 +23,7 @@ export class ApiRouter {
         this.router.use('/events' , this.eventRouter.getRouter())
 
     }
-    getRouter () {
+    getRouter() {
         return this.router
     }
 
