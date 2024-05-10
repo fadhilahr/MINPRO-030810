@@ -1,17 +1,13 @@
+import prisma from "@/prisma";
 import { Request , Response } from "express";
-import { PrismaClient } from "@prisma/client";
 
-
-
-const prisma = new PrismaClient()
 
 export class EventController {
-    async getEvent (req : Request , res : Response) {
-        
+    async getEvent(req : Request , res : Response) {
         try {
-            const events = await prisma.event.findMany({
-                
-            })
+            const events = await prisma.event.findMany()
+            console.log(events);
+            
             res.status(200).send({
                 status : 'ok',
                 events
@@ -48,7 +44,7 @@ export class EventController {
     }
     async createEvent  (req : Request, res : Response) {
         try {
-            const slug = req.body.name.toLowerCase().replaceAll(" ", "-")
+             const slug = req.body.name.toLowerCase().replaceAll(" ", "-")
             req.body.slug = slug
             await prisma.event.create({
                 data : req.body
@@ -59,6 +55,8 @@ export class EventController {
             })
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send({
                 status: 'error',
                 message : err
