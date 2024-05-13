@@ -10,6 +10,7 @@
     "test": "npx cypress verify & cypress run --component"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.4",
     "flowbite-react": "^0.9.0",
     "formik": "^2.4.6",
     "login-modal": "^0.0.1",
@@ -18,6 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.0",
+    "react-redux": "^9.1.2",
     "yup": "^1.4.0"
   },
   "devDependencies": {
