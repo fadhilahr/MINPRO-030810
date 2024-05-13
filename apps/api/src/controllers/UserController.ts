@@ -92,7 +92,7 @@ export class UserController {
             await transporter.sendMail({
                 from: process.env.MAIL_USER,
                 to: user.email,
-                subject: "Verify your Eventopia account 📝",
+                subject: "Verify your Grachetta account 📝",
                 html
             });
             res.status(200).send({
