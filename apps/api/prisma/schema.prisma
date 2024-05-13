@@ -43,8 +43,9 @@ model User {
   accountType    String        @default("user")
   wishlist       Wishlist?
   Transaction    Transaction[]
-  review         review[]
-  PointUser      PointUser[]
+
+  PointUser PointUser[]
+  Review    Review[]
 }
 
 model Organizer {
@@ -75,7 +76,7 @@ model Event {
   organizer        Organizer      @relation(fields: [organizerId], references: [id])
   wishlistItem     WishlistItem[]
   Transaction      Transaction[]
-  review           review[]
+  Review           Review[]
   Promo            Promo[]
 }
 
@@ -127,7 +128,7 @@ model Transaction {
   event         Event             @relation(fields: [eventId], references: [id])
 }
 
-model review {
+model Review {
   id      Int    @id @default(autoincrement())
   userId  Int
   eventId Int
@@ -142,7 +143,7 @@ model PointUser {
   userId    Int
   point     Int      @default(10000)
   createdAt DateTime @default(now())
-  expireAt DateTime 
+  expireAt  DateTime
   isRedeem  Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
 }
