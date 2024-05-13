@@ -10,91 +10,88 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Sample {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("samples") // if you want to use snake_case format
+enum EventStatus {
+  ComingSoon
+  available
+  Finished
 }
 
 enum EventCategory {
-  CONCERTS
-  SPORTS
-  FESTIVALS
-  ART
-  CONFERENCES
-  EXPOS
+  Sports
+  Conferences
+  Expos
+  Concerts
+  Festivals
+  ArtPerformance
 }
 
 enum TransactionStatus {
-  PENDING
-  PAID
-  CANCEL
+  Pending
+  Paid
+  Cancel
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  name        String
-  email       String        @unique
-  password    String        @db.LongText
-  profile     String?       @db.LongText
-  isActive    Boolean       @default(false)
-  referral    String?      @unique
-  isReedem    Boolean       @default(true)
+  id             Int           @id @default(autoincrement())
+  name           String
+  email          String        @unique
+  profilePicture String?       @db.LongText
+  password       String        @db.LongText
+  isActive       Boolean       @default(false)
+  referral       String?       @unique
+  isRedeem       Boolean       @default(true)
   accountType    String        @default("user")
-  points      Int?
-  Whishlist   Whishlist?
-  Transaction Transaction[]
-  Review      Review[]
+  wishlist       Wishlist?
+  Transaction    Transaction[]
+  review         review[]
+  PointUser      PointUser[]
 }
 
 model Organizer {
-  id       Int     @id @default(autoincrement())
-  name     String
-  email    String @unique
-  profilePicture String? @db.LongText 
-  password String  @db.LongText
-  profile  String? @db.LongText
-  isActive Boolean @default(false)
-  accountType    String        @default("organizer")
-  Event    Event[]
+  id             Int     @id @default(autoincrement())
+  name           String
+  email          String  @unique
+  profilePicture String? @db.LongText
+  password       String  @db.LongText
+  accountType    String  @default("organizer")
+  isActive       Boolean @default(false)
+  event          Event[]
 }
 
 model Event {
-  id            Int             @id @default(autoincrement())
-  name          String
-  startSale     DateTime        @default(now())
-  eventDate     DateTime        @default(now())
-  organizerId   Int
-  date          DateTime        @default(now())
-  price         Int
-  category      EventCategory
-  location      String
-  stock         Int
-  description   String?         @db.LongText
-  slug          String          @unique
-  organizer     Organizer       @relation(fields: [organizerId], references: [id])
-  WhishlistItem WhishlistItem[]
-  Promo         Promo[]
-  Review        Review[]
+  id               Int            @id @default(autoincrement())
+  name             String
+  organizerId      Int
+  startSale        DateTime       @default(now())
+  eventDate        DateTime       @default(now())
+  status           EventStatus
+  price            Int
+  slug             String         @db.LongText
+  category         EventCategory
+  city             String
+  address          String
+  availableTickets Int
+  description      String?        @db.LongText
+  organizer        Organizer      @relation(fields: [organizerId], references: [id])
+  wishlistItem     WishlistItem[]
+  Transaction      Transaction[]
+  review           review[]
+  Promo            Promo[]
 }
 
-model Whishlist {
-  id            Int             @id @default(autoincrement())
-  userId        Int             @unique
-  user          User            @relation(fields: [userId], references: [id])
-  WhishlistItem WhishlistItem[]
+model Wishlist {
+  id           Int            @id @default(autoincrement())
+  userId       Int            @unique
+  user         User           @relation(fields: [userId], references: [id])
+  wishlistItem WishlistItem[]
 }
 
-model WhishlistItem {
-  id          Int       @id @default(autoincrement())
-  whishlistId Int
-  eventId     Int
-  whistlist   Whishlist @relation(fields: [whishlistId], references: [id])
-  event       Event     @relation(fields: [eventId], references: [id])
+model WishlistItem {
+  id         Int      @id @default(autoincrement())
+  wishlistId Int
+  eventId    Int
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
+  event      Event    @relation(fields: [eventId], references: [id])
 }
 
 model Promo {
@@ -105,13 +102,13 @@ model Promo {
 }
 
 model PromoItem {
-  id       Int      @id @default(autoincrement())
-  name     String
-  discount Int
-  starDate DateTime
-  endDate  DateTime
-  promoId  Int
-  promo    Promo    @relation(fields: [promoId], references: [id])
+  id        Int      @id @default(autoincrement())
+  name      String
+  discount  Int
+  startDate DateTime
+  endDate   DateTime
+  promoId   Int
+  promo     Promo    @relation(fields: [promoId], references: [id])
 }
 
 model Transaction {
@@ -119,7 +116,7 @@ model Transaction {
   userId        Int
   eventId       Int
   quantity      Int
-  promoItemId   Int
+  promoItemId   Int?
   totalDiscount Int
   total         Int
   grandTotal    Int
@@ -127,14 +124,25 @@ model Transaction {
   imageUrl      String?
   createdAt     DateTime          @default(now())
   user          User              @relation(fields: [userId], references: [id])
+  event         Event             @relation(fields: [eventId], references: [id])
 }
 
-model Review {
-  id      Int   @id @default(autoincrement())
+model review {
+  id      Int    @id @default(autoincrement())
   userId  Int
   eventId Int
-  rating  Int
-  review  Int
-  user    User  @relation(fields: [userId], references: [id])
-  event   Event @relation(fields: [eventId], references: [id])
+  Rating  Int
+  Review  String
+  user    User   @relation(fields: [userId], references: [id])
+  event   Event  @relation(fields: [eventId], references: [id])
+}
+
+model PointUser {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  point     Int      @default(10000)
+  createdAt DateTime @default(now())
+  expireAt DateTime 
+  isRedeem  Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
 }

@@ -1,4 +1,4 @@
-import { AccountController } from '@/controllers/EventController';
+import { AccountController } from '@/controllers/AccountController';
 import { VerifyToken } from '@/middleware/token.middleware';
 import { Router } from 'express';
 
