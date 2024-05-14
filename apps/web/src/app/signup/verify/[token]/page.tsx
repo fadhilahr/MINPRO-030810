@@ -5,19 +5,16 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
 
 const registerSchema = yup.object().shape({
+  name: yup.string().required('Name can be not empty'),
   email: yup.string().email('invalid email').required('email can not be empty'),
   password: yup.string().min(6, 'password must contains at least 6 characters').required('password can not be empty'),
 })
-
-
-export default function UserLoginForm() {
+export default function Page() {
 
   const router = useRouter()
   const handeLogin = async (dataset: { email: string, password: string }) => {
     try {
-      console.log(dataset);
-      
-      const response = await fetch('http://localhost:8000/api/users/login', {
+      const response = await fetch('http://localhost:8000/api/organizer/login', {
         method: "POST",
         headers: {
           "content-type": "application/json"
@@ -36,7 +33,6 @@ export default function UserLoginForm() {
     }
   }
   return (
-
     <div>
       <Formik
         initialValues={{
@@ -45,8 +41,6 @@ export default function UserLoginForm() {
         }}
         validationSchema={registerSchema}
         onSubmit={(values: { email: string, password: string }, action: { resetForm: () => void }) => {
-          console.log(values);
-          
           handeLogin(values)
           action.resetForm()
         }}>
@@ -132,7 +126,7 @@ export default function UserLoginForm() {
                       <div className="flex items-center justify-between">
                       <p className="text-sm text-gray-500">
                         No account?
-                        <a className="underline" href="/signup/register.user">Sign up</a>
+                        <a className="underline" href="/Daftar/register.user">Sign up</a>
                       </p>
                       <button type="submit" className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">Login</button>
                       </div>
@@ -144,7 +138,7 @@ export default function UserLoginForm() {
                   <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
                     <img
                       alt=""
-                      src="./public/images/bg-login.jpg"
+                      src="./images/bg-login.jpg"
                       className="absolute inset-0 h-full w-full object-cover rounded-lg"
                     />
                   </div>
@@ -156,4 +150,3 @@ export default function UserLoginForm() {
     </div>
   )
 }
-
