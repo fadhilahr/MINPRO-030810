@@ -32,20 +32,20 @@ enum TransactionStatus {
 }
 
 model User {
-  id             Int           @id @default(autoincrement())
-  name           String
-  email          String        @unique
-  profilePicture String?       @db.LongText
-  password       String        @db.LongText
-  isActive       Boolean       @default(false)
-  referral       String?       @unique
-  isRedeem       Boolean       @default(true)
-  accountType    String        @default("user")
-  wishlist       Wishlist?
-  Transaction    Transaction[]
-
-  PointUser PointUser[]
-  Review    Review[]
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String        @unique
+  password    String        @db.LongText
+  profile     String?       @db.LongText
+  isActive    Boolean       @default(false)
+  referral    String?       @unique
+  isReedem    Boolean       @default(true)
+  accountType String        @default("user")
+  points      Int?
+  Whishlist   Whishlist?
+  Transaction Transaction[]
+  Review      Review[]
+  PointUser   PointUser[]
 }
 
 model Organizer {
@@ -54,9 +54,10 @@ model Organizer {
   email          String  @unique
   profilePicture String? @db.LongText
   password       String  @db.LongText
-  accountType    String  @default("organizer")
+  profile        String? @db.LongText
   isActive       Boolean @default(false)
-  event          Event[]
+  accountType    String  @default("organizer")
+  Event          Event[]
 }
 
 model Event {
@@ -147,3 +148,4 @@ model PointUser {
   isRedeem  Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
 }
+
