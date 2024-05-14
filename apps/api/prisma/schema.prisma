@@ -42,25 +42,26 @@ model User {
   password    String        @db.LongText
   profile     String?       @db.LongText
   isActive    Boolean       @default(false)
-  referral    String?      @unique
+  referral    String?       @unique
   isReedem    Boolean       @default(true)
-  accountType    String        @default("user")
+  accountType String        @default("user")
   points      Int?
   Whishlist   Whishlist?
   Transaction Transaction[]
   Review      Review[]
+  PointUser   PointUser[]
 }
 
 model Organizer {
-  id       Int     @id @default(autoincrement())
-  name     String
-  email    String @unique
-  profilePicture String? @db.LongText 
-  password String  @db.LongText
-  profile  String? @db.LongText
-  isActive Boolean @default(false)
-  accountType    String        @default("organizer")
-  Event    Event[]
+  id             Int     @id @default(autoincrement())
+  name           String
+  email          String  @unique
+  profilePicture String? @db.LongText
+  password       String  @db.LongText
+  profile        String? @db.LongText
+  isActive       Boolean @default(false)
+  accountType    String  @default("organizer")
+  Event          Event[]
 }
 
 model Event {
@@ -137,4 +138,14 @@ model Review {
   review  Int
   user    User  @relation(fields: [userId], references: [id])
   event   Event @relation(fields: [eventId], references: [id])
+}
+
+model PointUser {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  point     Int      @default(10000)
+  createdAt DateTime @default(now())
+  expireAt  DateTime
+  isRedeem  Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
 }
