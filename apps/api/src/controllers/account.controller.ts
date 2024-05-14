@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import prisma from '@/prisma';
 import {compare} from 'bcrypt'
 import {sign} from 'jsonwebtoken'
+import prisma from '@/prisma';
 
 export class AccountController {
        
@@ -11,7 +11,7 @@ export class AccountController {
                 if (req.user?.refCode !== undefined) {
                     await prisma.user.update({
                         data: {
-                            isReedem: false,
+                            isRedeem: false,
                         },
                         where: {
                             id: req.user?.id

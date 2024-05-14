@@ -5,11 +5,12 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
 
 const registerSchema = yup.object().shape({
-  name: yup.string().required('Name can be not empty'),
   email: yup.string().email('invalid email').required('email can not be empty'),
   password: yup.string().min(6, 'password must contains at least 6 characters').required('password can not be empty'),
 })
-export default function Page() {
+
+
+export default function UserLoginForm() {
 
   const router = useRouter()
   const handeLogin = async (dataset: { email: string, password: string }) => {

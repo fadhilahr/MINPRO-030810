@@ -6,6 +6,12 @@ import { Router } from 'next/router'
 import React, { useState } from 'react'
 import * as yup from 'yup'
 
+const registerSchema = yup.object().shape({
+  name : yup.string().required('name con not be empty'),
+  email : yup.string().email('invalid email').required('email can not be empty'),
+  password : yup.string().min(6, 'password must containts at least 6 characters ').required('password can not be empty')
+})
+
 
 
 const page = () => {

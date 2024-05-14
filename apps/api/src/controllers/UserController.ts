@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import prisma from '@/prisma';
+
 import { compare, genSalt, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
 import Handlebars from 'handlebars';
 import { transporter } from '@/helpers/nodemailer';
+import prisma from "@/prisma";
 
 
 

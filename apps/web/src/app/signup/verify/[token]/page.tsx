@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client'
 
 import { useRouter } from 'next/navigation'
@@ -127,7 +126,7 @@ export default function Page() {
                       <div className="flex items-center justify-between">
                       <p className="text-sm text-gray-500">
                         No account?
-                        <a className="underline" href="/signup/register.user">Sign up</a>
+                        <a className="underline" href="/Daftar/register.user">Sign up</a>
                       </p>
                       <button type="submit" className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">Login</button>
                       </div>
@@ -151,5 +150,3 @@ export default function Page() {
     </div>
   )
 }
-=======
->>>>>>> 664011a920750af2160ef286bfb538304d4a48a3
