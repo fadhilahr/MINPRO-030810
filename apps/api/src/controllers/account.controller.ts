@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import prisma from '@/prisma';
 import {compare} from 'bcrypt'
 import {sign} from 'jsonwebtoken'
+import prisma from '@/prisma';
 
 export class AccountController {
        

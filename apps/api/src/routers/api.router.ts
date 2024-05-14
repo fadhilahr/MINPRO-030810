@@ -2,7 +2,7 @@ import {Request, Response, Router} from 'express'
 import { UserRouter } from './UserRouter'
 import { VerifyToken } from '@/middleware/token.middleware'
 import { OrganizerRouter } from './OrganizerRouter'
-import { AccountRouter } from './EventRouter'
+import { AccountRouter } from './account.router'
 
 export class ApiRouter {
     private userRouter: UserRouter 

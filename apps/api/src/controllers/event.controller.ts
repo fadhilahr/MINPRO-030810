@@ -22,26 +22,24 @@ export class EventController {
             
         }
     }
-    async getEventSlug (req : Request, res : Response) {
+    async getEventSlug (req: Request, res: Response ){
         try {
-            const events = await prisma.event.findUnique({
-                where :{
-                    slug : req.params.slug
-                }
-            })
-            res.status(200).send({
-                status : 'ok',
-                events
-            })
-            
+          const events = await prisma.event.findMany({
+            where:{
+                slug : req.params.slug
+            }
+          })
+          res.status(200).send({
+            status : 'ok',
+            events
+          })
         } catch (err) {
-            res.status(400).send({
-                status : 'error',
-                message : err
-            })
-            
+          res.status(400).send({
+            status : 'error',
+            message : err
+          })
         }
-    }
+      }
     async createEvent  (req : Request, res : Response) {
         try {
              const slug = req.body.name.toLowerCase().replaceAll(" ", "-")
