@@ -78,8 +78,6 @@ model Event {
   Review           Review[]
   Promo            Promo[]
 }
-
-
 model Promo {
   id        Int         @id @default(autoincrement())
   eventId   Int

@@ -40,7 +40,7 @@ const ModalLogin = () => {
 
                   <ul className="mt-4 space-y-2">
                     <li>
-                      <a href="/login/login.user" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
+                      <a href="/Login/login.user" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
                         <strong className="font-medium text-2xl text-white">Log-In as Costumers </strong>
                         <CIcon icon={cilUser} size="xl" />
                       </a>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client'
 
 import { useRouter } from 'next/navigation'
@@ -151,5 +150,3 @@ export default function Page() {
     </div>
   )
 }
-=======
->>>>>>> 664011a920750af2160ef286bfb538304d4a48a3
