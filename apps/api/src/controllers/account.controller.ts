@@ -11,7 +11,7 @@ export class AccountController {
                 if (req.user?.refCode !== undefined) {
                     await prisma.user.update({
                         data: {
-                            isRedeem: false,
+                           isReedem: false
                         },
                         where: {
                             id: req.user?.id

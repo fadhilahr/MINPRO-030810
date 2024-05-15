@@ -9,9 +9,9 @@ import { HiInformationCircle } from "react-icons/hi";
 
 export const Header = () => {
 
-  return <div>
-
-    <header className="bg-black dark:bg-gray-900">
+  return <div className ="bg-transparent">
+    <div>
+    <header className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-500">
       <div className=" gap-10 w-full  px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 gap-6 w-full items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
@@ -49,7 +49,7 @@ export const Header = () => {
                 <li>
                   <a
                     className=" hover:text-gray-700  text-white  dark:hover:text-gray-300 font-semibold "
-                    href="/Daftar"
+                    href="/signup"
                   >
                     Daftar
                   </a>
@@ -66,6 +66,7 @@ export const Header = () => {
         </div>
       </div>
     </header>
+  </div>
   </div>
 
 

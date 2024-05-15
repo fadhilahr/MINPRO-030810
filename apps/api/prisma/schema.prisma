@@ -42,7 +42,6 @@ model User {
   isReedem    Boolean       @default(true)
   accountType String        @default("user")
   points      Int?
-  Whishlist   Whishlist?
   Transaction Transaction[]
   Review      Review[]
   PointUser   PointUser[]
@@ -75,26 +74,11 @@ model Event {
   availableTickets Int
   description      String?        @db.LongText
   organizer        Organizer      @relation(fields: [organizerId], references: [id])
-  wishlistItem     WishlistItem[]
   Transaction      Transaction[]
   Review           Review[]
   Promo            Promo[]
 }
 
-model Wishlist {
-  id           Int            @id @default(autoincrement())
-  userId       Int            @unique
-  user         User           @relation(fields: [userId], references: [id])
-  wishlistItem WishlistItem[]
-}
-
-model WishlistItem {
-  id         Int      @id @default(autoincrement())
-  wishlistId Int
-  eventId    Int
-  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
-  event      Event    @relation(fields: [eventId], references: [id])
-}
 
 model Promo {
   id        Int         @id @default(autoincrement())
@@ -148,4 +132,3 @@ model PointUser {
   isRedeem  Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
 }
-
