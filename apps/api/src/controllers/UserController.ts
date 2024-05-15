@@ -30,6 +30,8 @@ export class UserController {
     async createUser(req: Request, res: Response) {
         try {
             const { name, email, password, refCode } = req.body;
+            console.log('TEST', req.body);
+            
             const salt = await genSalt(10);
             const hashPassword = await hash(password, salt);
             let existingUsers = await prisma.user.findUnique({
@@ -91,16 +93,16 @@ export class UserController {
                 link
             });
             await transporter.sendMail({
-                from: process.env.MAIL_USER,
+                from: "nurfadhilahramadhann@gmail.com",
                 to: user.email,
                 subject: "Verify your Grachetta account 📝",
                 html
             });
             res.status(200).send({
                 status: 'ok',
-                user,
-                accountType: user.accountType,
-                token
+                // user,
+                // accountType: user.accountType,
+                // token
             });
 
         } catch (error) {

@@ -1,83 +1,58 @@
 export default function Carousel() {
     return (
-      <div className ='relative mx-60 pt-24 mx:sm '>
-      {/* <!-- Slider --> */}
-<div data-hs-carousel='{
-    "loadingClasses": "opacity-0",
-    "isAutoPlay": true
-  }' className="relative">
-  <div className="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
-    <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-100 p-6 dark:bg-neutral-900">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
-          <img className="p-8 rounded-t-lg" src="https://loket-production-sg.s3.ap-southeast-1.amazonaws.com/images/ss/1690260495_PraZyu.jpg" alt="product image" />
-          </span>
-        </div>
-      </div>
+     
 
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-200 p-6 dark:bg-neutral-800">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
-          <img className="p-8 rounded-t-lg" src="https://loket-production-sg.s3.ap-southeast-1.amazonaws.com/images/ss/1714729026_gyF4au.jpg" alt="product image2" />
-          </span>
+<div id="indicators-carousel" className="relative w-full" data-carousel="static">
+    {/* <!-- Carousel wrapper --> */}
+    <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+         {/* <!-- Item 1 --> */}
+        <div className="hidden duration-700 ease-in-out" data-carousel-item="active">
+            <img src="/docs/images/carousel/carousel-1.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
         </div>
-      </div>
-
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
-          <img className="p-8 rounded-t-lg" src="https://loket-production-sg.s3.ap-southeast-1.amazonaws.com/images/ss/1715054444_vzxRxg.jpg" alt="product image3" />
-          </span>
+        {/* <!-- Item 2 --> */}
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-2.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
         </div>
-      </div>
-
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
-          <img className="p-8 rounded-t-lg" src="https://loket-production-sg.s3.ap-southeast-1.amazonaws.com/images/ss/1711354417_Jpabw7.jpg" alt="product image3" />
-          </span>
+        {/* <!-- Item 3 --> */}
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-3.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
         </div>
-      </div>
-      
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
-          <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
-          <img className="p-8 rounded-t-lg" src="https://loket-production-sg.s3.ap-southeast-1.amazonaws.com/images/ss/1714729203_Ub51XU.jpg" alt="product image3" />
-          </span>
+        {/* <!-- Item 4 --> */}
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-4.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
         </div>
-      </div>
-
+        {/* <!-- Item 5 --> */}
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-5.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+        </div>
     </div>
-  </div>
-
-  <button type="button" className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10">
-    <span className="text-2xl" aria-hidden="true">
-      <svg className="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
-    </span>
-    <span className="sr-only">Previous</span>
-  </button>
-  <button type="button" className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10">
-    <span className="sr-only">Next</span>
-    <span className="text-2xl" aria-hidden="true">
-      <svg className="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="m9 18 6-6-6-6"></path>
-      </svg>
-    </span>
-  </button>
-
-  <div className="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-    <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
-  </div>
+    {/* <!-- Slider indicators --> */}
+    <div className="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+    </div>
+    {/* <!-- Slider controls --> */}
+    <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span className="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span className="sr-only">Next</span>
+        </span>
+    </button>
 </div>
-{/* <!-- End Slider --> */}
-    </div>
+
     )
   }
   
