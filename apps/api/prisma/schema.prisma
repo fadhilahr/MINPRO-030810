@@ -78,9 +78,6 @@ model Event {
   Review           Review[]
   Promo            Promo[]
 }
-
-
-
 model Promo {
   id        Int         @id @default(autoincrement())
   eventId   Int
@@ -133,4 +130,3 @@ model PointUser {
   isRedeem  Boolean  @default(false)
   user      User     @relation(fields: [userId], references: [id])
 }
-

@@ -5,13 +5,13 @@ import CIcon from '@coreui/icons-react';
 
 const ModalLogin = () => {
   return (
-    <div className ='flex'>
+    <div>
       <div className="flex items-center gap-10 w-full rounded-lg">
         <button type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-vertically-centered-modal">
           Sign In
         </button>
 
-        <div id="hs-vertically-centered-modal" className="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
+        <div id="hs-vertically-centered-modal" className="hs-overlay bg-current hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
           <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
             <div className="w-full flex flex-col bg-slate-700 border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
               <div className="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
