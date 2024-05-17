@@ -10,7 +10,7 @@ export interface AccountSlice {
         sumPoint?: number,
         expireSoonPoint?: number,
         expireDate?: string,
-        profilePicture?: string
+        image?: string
     } | null;
 }
 

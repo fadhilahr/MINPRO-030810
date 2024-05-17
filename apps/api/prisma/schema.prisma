@@ -46,7 +46,6 @@ model User {
   Review      Review[]
   PointUser   PointUser[]
 }
-
 model Organizer {
   id             Int     @id @default(autoincrement())
   name           String
@@ -78,8 +77,6 @@ model Event {
   Review           Review[]
   Promo            Promo[]
 }
-
-
 model Promo {
   id        Int         @id @default(autoincrement())
   eventId   Int
@@ -96,7 +93,6 @@ model PromoItem {
   promoId   Int
   promo     Promo    @relation(fields: [promoId], references: [id])
 }
-
 model Transaction {
   id            Int               @id @default(autoincrement())
   userId        Int

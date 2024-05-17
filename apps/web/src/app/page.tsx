@@ -9,7 +9,7 @@ export default function Home() {
      <div className ='bg-slate-800'>
       <Banner />
    {/* <Carousel /> */}
-   <CarouselCard/>
+   {/* <CarouselCard/> */}
    </div>
 )
 }

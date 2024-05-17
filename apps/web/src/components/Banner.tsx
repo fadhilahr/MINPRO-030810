@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Banner = () => {
+
   return (
     <div>
         <section
@@ -26,8 +27,9 @@ const Banner = () => {
 
       <div className="mt-8 flex flex-wrap gap-4 text-center">
         <a
-          href="#"
-          className="block w-full rounded bg-blue-500 px-12 py-3 text-sm font-medium text-white shadow hover:bg-transparent focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+        href='#'
+          id="scrollButton"
+          className="py-3  px-4 inline-flex justify-center mx-auto items-center gap-x-2 text-sm font-semibold rounded-lg border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 disabled:opacity-50 hover:-translate-y-1 hover:scale-110 duration-300 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500 dark:hover:border-blue-600"
         >
           Get Started
         </a>

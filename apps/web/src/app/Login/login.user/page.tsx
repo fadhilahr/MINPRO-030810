@@ -3,6 +3,9 @@
 import { useRouter } from 'next/navigation'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
+import { createToken } from '@/app/action'
+import { useDispatch } from 'react-redux'
+import { setUser } from '@/lib/features/account/account'
 
 const registerSchema = yup.object().shape({
   email: yup.string().email('invalid email').required('email can not be empty'),
@@ -11,11 +14,12 @@ const registerSchema = yup.object().shape({
 
 
 export default function UserLoginForm() {
-
+  const dispatch = useDispatch()
   const router = useRouter()
+  
   const handeLogin = async (dataset: { email: string, password: string }) => {
     try {
-      console.log(dataset);
+      // console.log(dataset);
       
       const response = await fetch('http://localhost:8000/api/users/login', {
         method: "POST",
@@ -28,7 +32,8 @@ export default function UserLoginForm() {
       if (data.status !== "ok") {
         throw (data.message)
       } else {
-        router.push('/')
+        dispatch(setUser(data.userData))
+        createToken(data.token, '/')
       }
     } catch (error) {
       console.log(error)
@@ -45,7 +50,7 @@ export default function UserLoginForm() {
         }}
         validationSchema={registerSchema}
         onSubmit={(values: { email: string, password: string }, action: { resetForm: () => void }) => {
-          console.log(values);
+          // console.log(values);
           
           handeLogin(values)
           action.resetForm()
@@ -130,7 +135,7 @@ export default function UserLoginForm() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-white">
                         No account?
                         <a className="underline" href="/signup/register.user">Sign up</a>
                       </p>
@@ -144,7 +149,7 @@ export default function UserLoginForm() {
                   <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
                     <img
                       alt=""
-                      src="./public/images/bg-login.jpg"
+                      src="https://miro.medium.com/v2/resize:fit:1400/1*ydhn1QPAKsrbt6UWfn3YnA.jpeg"
                       className="absolute inset-0 h-full w-full object-cover rounded-lg"
                     />
                   </div>

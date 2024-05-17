@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import PrelineScript from '@/components/PrelineScript';
+import { StoreProvider } from './storeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    <StoreProvider>
     <html lang="en">
       <body className={inter.className}>
         <Header/>
@@ -26,5 +28,7 @@ export default function RootLayout({
       </body>
       <PrelineScript/>
     </html>
+    </StoreProvider>
+    
   );
 }

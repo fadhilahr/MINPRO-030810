@@ -3,9 +3,9 @@ import React from 'react'
 const SearchFilter = () => {
   return (
     <div className="relative grow">
-  <label htmlFor="Search" className="sr-only"> Search for... </label>
+  <label htmlFor="Search" className="sr-only text-white "> Search for... </label>
 
-  <input type="text" id="Search" placeholder="chad@rhcp.com" className="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"/>
+  <input type="text" id="Search" placeholder="Search.." className="w-full bg-gray-700 rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"/>
 
   <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
     <button type="button" className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
@@ -27,6 +27,7 @@ const SearchFilter = () => {
       </svg>
     </button>
   </span>
+  
 </div>
   )
 }

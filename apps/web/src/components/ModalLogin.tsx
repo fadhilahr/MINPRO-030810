@@ -1,9 +1,11 @@
 import React from 'react'
 
-import { cilGroup, cilUser, cilUserFollow } from '@coreui/icons';
+import { cilGroup, cilUser } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 
-const ModalLogin = () => {
+
+export function ModalLogin() {
+ 
   return (
     <div>
       <div className="flex items-center gap-10 w-full rounded-lg">
@@ -40,14 +42,14 @@ const ModalLogin = () => {
 
                   <ul className="mt-4 space-y-2">
                     <li>
-                      <a href="/login/login.user" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
+                      <a href="/Login/login.user" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
                         <strong className="font-medium text-2xl text-white">Log-In as Costumers </strong>
                         <CIcon icon={cilUser} size="xl" />
                       </a>
                     </li>
 
                     <li>
-                      <a href="/login/login.organizer" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
+                      <a href="/Login/login.organizer" className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600">
                         <strong className="font-medium text-2xl text-white">Log-In as Organizer </strong>
                         <CIcon icon={cilGroup} size="xl" />
 
