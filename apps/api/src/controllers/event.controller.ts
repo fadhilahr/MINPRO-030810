@@ -5,11 +5,18 @@ import { Request , Response } from "express";
 export class EventController {
     async getEvent(req : Request , res : Response) {
         try {
-            const events = await prisma.event.findMany()
-            console.log(events);
-            
+            const events = await prisma.event.findMany({
+                where : {
+                    organizerId: req.user?.id
+                },
+                include:{
+                    Promo : true,
+                    Transaction : true
+                }
+            })
             res.status(200).send({
                 status : 'ok',
+                message : 'event available',
                 events
             })
 
@@ -27,6 +34,9 @@ export class EventController {
           const events = await prisma.event.findMany({
             where:{
                 slug : req.params.slug
+            }, 
+            include: {
+                Promo : true
             }
           })
           res.status(200).send({
