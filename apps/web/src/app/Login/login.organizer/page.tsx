@@ -1,8 +1,12 @@
+
 'use client'
 
 import { useRouter } from 'next/navigation'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { setUser } from '@/lib/features/account/account'
+import { createToken } from '@/app/action'
 
 const registerSchema = yup.object().shape({
   name: yup.string().required('Name can be not empty'),
@@ -11,27 +15,32 @@ const registerSchema = yup.object().shape({
 })
 export default function Page() {
 
-  const router = useRouter()
-  const handeLogin = async (dataset: { email: string, password: string }) => {
-    try {
-      const response = await fetch('http://localhost:8000/api/organizer/login', {
-        method: "POST",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(dataset)
-      })
-      const data = await response.json()
-      if (data.status !== "ok") {
-        throw (data.message)
-      } else {
-        router.push('/')
+    const dispatch = useDispatch()
+    const router = useRouter()
+    
+    const handeLogin = async (dataset: { email: string, password: string }) => {
+      try {
+        // console.log(dataset);
+        
+        const response = await fetch('http://localhost:8000/api/organizer/login', {
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(dataset)
+        })
+        const data = await response.json()
+        if (data.status !== "ok") {
+          throw (data.message)
+        } else {
+          dispatch(setUser(data.userData))
+          createToken(data.token, '/')
+        }
+      } catch (error) {
+        console.log(error)
+        alert(error)
       }
-    } catch (error) {
-      console.log(error)
-      alert(error)
     }
-  }
   return (
     <div>
       <Formik

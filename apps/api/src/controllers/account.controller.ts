@@ -64,29 +64,42 @@ export class AccountController {
     async getAccount(req: Request, res: Response) {
         try {
             if (req.user?.accountType == "user") {
-                const account = await prisma.user.findUnique({
+                const user = await prisma.user.findUnique({
                     where: {
                         id: req.user?.id
                     }
                 })
                 res.status(200).send({
-                    status: "ok",
-                    message: 'account found',
-                    account
+                    status : "ok",
+                    message : "user found",
+                    userData: {
+                        id : user?.id,
+                        name: user?.name,
+                        email: user?.email,
+                        accountType: user?.accountType
+                    }
                 })
             }
             if (req.user?.accountType == "organizer") {
-                const account = await prisma.organizer.findUnique({
-                    where: {
+                const organizer = await prisma.user.findUnique({
+                    where : {
                         id: req.user?.id
                     }
                 })
                 res.status(200).send({
-                    status: "ok",
-                    message: 'account found',
-                    account
+                    status : "ok",
+                    message : "user found",
+                    userData: {
+                        id: organizer?.id,
+                        name : organizer?.name,
+                        email : organizer?.email,
+                        accountType: organizer?.accountType
+                    }
                 })
             }
+                
+            
+            
         } catch (error) {
             res.status(400).send({
                 status: "error",
@@ -94,5 +107,22 @@ export class AccountController {
             })      
         }
     }
+
+    async getAccountType(req: Request, res: Response) {
+        try {
+            const accountType = req.user?.accountType
+            res.status(200).send(({
+                status: 'ok',
+                message: 'accountType found',
+                accountType
+            }))
+        } catch (error) {
+            res.status(400).send({
+                status: 'error',
+                message: error
+            })
+        }
+    }
     
+
 }

@@ -4,7 +4,7 @@ import { Card } from "flowbite-react";
 
 const page = () => {
   return (
-    <div className = 'bg-slate-800'>
+    <div className = 'bg-slate-800 pt-52 pb-52'>
       
       <h1 className = 'text-7xl font-bold flex justify-center pb-10 uppercase '>Register</h1>
     <div className ='justify-center items-center gap-10 sm:flex sm:gap-4 w-full h-full'>
