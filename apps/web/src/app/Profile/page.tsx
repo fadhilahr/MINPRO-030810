@@ -1,158 +1,141 @@
-import { useAppSelector } from '@/lib/features/hooks'
-import React from 'react'
+'use client'
+import { setUser } from '@/lib/features/account/account'
+import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
+import Cookies from 'js-cookie'
+import React, { useRef, useState } from 'react'
 
-export default function page () {
-    const account = useAppSelector((state) => state.account.value)
+export default function page() {
+  const imageRef = useRef<HTMLInputElement>(null)
+  const [image, setImage] = useState<File | null>(null) 
+  const dispatch = useAppDispatch()
+
+
+  const getUser = async (token: any) => {
+    try {
+      const response = await fetch('http://localhost:8000/api/accounts/accountType', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      })
+      const data = await response.json()
+      // console.log(data);
+      dispatch(setUser(data.userData))
+      if (data.message.message == "jwt expired") {
+        throw ("Session expired, please sign in again.")
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const handleImageSubmit = async () => {
+    try {
+      const formData = new FormData()
+      if (image) {
+        formData.append("file", image)
+      }
+      const token = Cookies.get("token")
+      const res = await fetch('http://localhost:8000/api/accounts/images',{
+        method: "PATCH",
+        body: formData,
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })  
+      if (res.ok) {
+        getUser(token)
+      } else {
+        throw res
+      }
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+const handleChange = () => {
+  if (imageRef.current && imageRef.current.files) {
+      const data = imageRef.current?.files[0]
+      setImage(data)
+  }
+}
+  const account = useAppSelector((state) => state.account.value)
   return (
     <div>
-      <section className="relative flex flex-wrap lg:h-screen lg:items-center bg-slate-900">
-  <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
-    <div className="mx-auto max-w-lg text-center">
-      <img className="inline-block size-[62px] rounded-full" src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Image Description"></img>
-      <h1 className="text-2xl font-bold sm:text-3xl text-white">Get started today!</h1>
+      <section className="relative flex flex-wrap lg:h-screen lg:items-center bg-slate-900 w-full">
+        <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+          <div className="mx-auto max-w-lg text-center">
+            <img className="inline-block rounded-full" src={account?.image} />
 
-      
-    </div>
-    <div>
-      {account?.accountType}
-    </div>
-    {/* <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
-      <div>
-        <label htmlFor="name" className="sr-only">Name</label>
 
-        <div className="relative">
-          <input
-            type="email"
-            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter email"
-          />
 
-          <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-              />
-            </svg>
-          </span>
+          </div>
+          <div>
+            <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
+              <dl className="-my-3 divide-y divide-gray-100 text-sm">
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-slate-500">
+                  <dt className="font-medium text-gray-900">Title</dt>
+                  <dd className="text-gray-700 sm:col-span-2">Mr</dd>
+                </div>
+
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">Name</dt>
+                  <dd className="text-gray-700 sm:col-span-2">{account?.name}</dd>
+                </div>
+
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-slate-500">
+                  <dt className="font-medium text-gray-900">Email</dt>
+                  <dd className="text-gray-700 sm:col-span-2">{account?.email}</dd>
+                </div>
+
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                  <dt className="font-medium text-gray-900">Point</dt>
+                  <dd className="text-gray-700 sm:col-span-2">{account?.id}</dd>
+                </div>
+
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-slate-500">
+                  <dt className="font-medium text-gray-900">Bio</dt>
+                  <dd className="text-gray-700 sm:col-span-2 ">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et facilis debitis explicabo
+                    doloremque impedit nesciunt dolorem facere, dolor quasi veritatis quia fugit aperiam
+                    aspernatur neque molestiae labore aliquam soluta architecto?
+                  </dd>
+                </div>
+                <div>
+                  <div className=" font-medium text-gray-900"></div>
+                  <dd className="text-gray-700 sm:col-span-2 bg-white">
+                    <div className="max-w-sm">
+                      <form>
+                        <label className="block">
+                          <span className="sr-only">Choose profile photo</span>
+                          <input  onChange={handleChange} type="file" ref={imageRef} className="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:disabled:opacity-50 file:disabled:pointer-events-none dark:text-neutral-500 dark:file:bg-blue-500 dark:hover:file:bg-blue-400 " />
+                        </label>
+                        <div>
+                        <button onClick={handleImageSubmit} type="button" className="py-3 px-4 inline-flex gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-500 text-white hover:bg-gray-600 disabled:opacity-50 disabled:pointer-events-none">
+                          SAVE
+                        </button>
+                        </div>
+                      </form>
+                    </div>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            {account?.accountType}
+          </div>
+
         </div>
-      </div>
 
-      <div>
-        <label htmlFor="email" className="sr-only">Email</label>
-
-        <div className="relative">
-          <input
-            type="email"
-            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter email"
+        <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
+          <img
+            alt=""
+            src={account?.image}
+            className="absolute inset-0 h-full w-full object-cover"
           />
-
-          <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-              />
-            </svg>
-          </span>
         </div>
-      </div>
+      </section>
 
-      <div>
-        <label htmlFor="password" className="sr-only">Password</label>
-
-        <div className="relative">
-          <input
-            type="password"
-            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter password"
-          />
-
-          <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-              />
-            </svg>
-          </span>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">
-          No account?
-          <a className="underline" href="#">Sign up</a>
-        </p>
-
-        <button
-          type="submit"
-          className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-        >
-          Sign in
-        </button>
-      </div>
-    </form> */}
-  </div>
-
-  <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
-    <img
-      alt=""
-      src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-      className="absolute inset-0 h-full w-full object-cover"
-    />
-  </div>
-</section>
-      <div className="max-w-sm">
-        <form>
-          <label className="block">
-            <span className="sr-only">Choose profile photo</span>
-            <input type="file" className="block w-full 
-        text-sm text-gray-500
-        file:me-4 file:py-2 file:px-4
-        file:rounded-lg file:border-0
-        file:text-sm file:font-semibold
-        file:bg-blue-600 file:text-white
-        hover:file:bg-blue-700
-        file:disabled:opacity-50 file:disabled:pointer-events-none
-        dark:text-neutral-500
-        dark:file:bg-blue-500
-        dark:hover:file:bg-blue-400
-      "/>
-          </label>
-        </form>
-      </div>
     </div>
   )
 }

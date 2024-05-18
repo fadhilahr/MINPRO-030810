@@ -10,6 +10,7 @@ import express, {
 import cors from 'cors';
 import { PORT } from './config';
 import { ApiRouter } from './routers/api.router';
+import path from "path"
 
 export default class App {
   private app: Express;
@@ -59,6 +60,8 @@ export default class App {
     });
 
     this.app.use('/api', apiRouter.getRouter())
+
+    this.app.use('/public', express.static(path.join(__dirname, '../public')))
     
   }
 

@@ -76,7 +76,8 @@ export class AccountController {
                         id : user?.id,
                         name: user?.name,
                         email: user?.email,
-                        accountType: user?.accountType
+                        accountType: user?.accountType,
+                        image: user?.profile
                     }
                 })
             }
@@ -93,7 +94,8 @@ export class AccountController {
                         id: organizer?.id,
                         name : organizer?.name,
                         email : organizer?.email,
-                        accountType: organizer?.accountType
+                        accountType: organizer?.accountType,
+                        image : organizer?.profile
                     }
                 })
             }
@@ -124,5 +126,38 @@ export class AccountController {
         }
     }
     
-
+    async profileUpload(req: Request, res: Response) {
+        try {
+            const {file} = req
+            if (!file) throw "No file uploaded"
+            const imageUrl = `http://localhost:8000/public/images/${file.filename}`
+            if (req.user?.accountType == "user") {
+                await prisma.user.update({
+                    data: {
+                        profile: imageUrl
+                    }, where: {
+                        id: req.user?.id
+                    }
+                })
+            }
+            if (req.user?.accountType == "organizer") {
+                await prisma.organizer.update({
+                    data: {
+                        profilePicture: imageUrl
+                    }, where: {
+                        id: req.user?.id
+                    }
+                })
+            }
+            res.status(200).send({ 
+                status: 'ok',
+                message: 'image successfully uploaded'
+            })
+        } catch (error) {
+            res.status(400).send({
+                status: 'error',
+                message: error
+            })
+        }
+    }
 }
