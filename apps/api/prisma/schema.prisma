@@ -14,6 +14,8 @@ enum EventStatus {
   ComingSoon
   available
   Finished
+  Cancelled
+  SoldOut
 }
 
 enum EventCategory {
@@ -33,6 +35,11 @@ enum TransactionStatus {
   Declined
 }
 
+enum DiscountType {
+  Nominal
+  Percent
+}
+
 model User {
   id          Int           @id @default(autoincrement())
   name        String
@@ -41,6 +48,7 @@ model User {
   profile     String?       @db.LongText
   isActive    Boolean       @default(false)
   referral    String?       @unique
+  RedeemExpire DateTime?    
   isReedem    Boolean       @default(true)
   accountType String        @default("user")
   points      Int?
