@@ -26,9 +26,11 @@ enum EventCategory {
 }
 
 enum TransactionStatus {
-  Pending
+ WaitingPayment
+  WaitingConfirmation
   Paid
-  Cancel
+  Cancelled
+  Declined
 }
 
 model User {

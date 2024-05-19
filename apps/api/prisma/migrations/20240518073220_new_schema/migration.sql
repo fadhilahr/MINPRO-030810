@@ -76,13 +76,17 @@ CREATE TABLE `Transaction` (
     `userId` INTEGER NOT NULL,
     `eventId` INTEGER NOT NULL,
     `quantity` INTEGER NOT NULL,
-    `promoItemId` INTEGER NULL,
-    `totalDiscount` INTEGER NOT NULL,
+    `promoId` INTEGER NULL,
+    `useReferral` BOOLEAN NOT NULL DEFAULT false,
+    `PointUsed` INTEGER NULL,
+    `totalDiscount` INTEGER NULL,
     `total` INTEGER NOT NULL,
     `grandTotal` INTEGER NOT NULL,
-    `status` ENUM('Pending', 'Paid', 'Cancel') NOT NULL,
+    `status` ENUM('WaitingPayment', 'WaitingConfirmation', 'Paid', 'Cancelled', 'Declined') NOT NULL,
     `imageUrl` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `paidAt` DATETIME(3) NULL,
+    `confirmedAt` DATETIME(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -124,6 +128,9 @@ ALTER TABLE `Transaction` ADD CONSTRAINT `Transaction_userId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `Transaction` ADD CONSTRAINT `Transaction_eventId_fkey` FOREIGN KEY (`eventId`) REFERENCES `Event`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Transaction` ADD CONSTRAINT `Transaction_promoId_fkey` FOREIGN KEY (`promoId`) REFERENCES `Promo`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Review` ADD CONSTRAINT `Review_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
