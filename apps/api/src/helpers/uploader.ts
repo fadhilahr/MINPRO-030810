@@ -1,6 +1,5 @@
 import {Request} from 'express'
 import multer from 'multer'
-
 import path from 'path'
 
 type DestinationCallback = (error: Error | null, destinaon: string) => void

@@ -97,7 +97,7 @@ export const Header = () => {
                   <li>
                     <a
                       className="hover:text-gray-700  text-white  dark:hover:text-gray-300 font-semibold"
-                      href="/"
+                      href="/CreateEvent"
                     >
                       Create Event
                     </a>
@@ -108,7 +108,7 @@ export const Header = () => {
                   <li>
                     <a
                       className="hover:text-gray-700  text-white  dark:hover:text-gray-300 font-semibold"
-                      href="/"
+                      href="/AboutUs"
                     >
                       About Us
                     </a>
@@ -133,15 +133,15 @@ export const Header = () => {
             </div>
           <div className={`${account?.accountType? "flex" : "hidden"}`} >
             <Dropdown 
-              label={<Avatar alt="User settings" img="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj" rounded />}
+              label={<Avatar alt="User settings" img={account?.image} rounded />}
               arrowIcon={false}
               inline
             >
               <Dropdown.Header >
                 <span className="block text-sm">{}</span>
-                <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+                <span className="block truncate text-sm font-bold">{account?.email}</span>
               </Dropdown.Header>
-              <a href ='./Dashboard/DashUser'><Dropdown.Item>Dashboard</Dropdown.Item></a>
+              <a href ='/DashUser'><Dropdown.Item>Dashboard</Dropdown.Item></a>
               <a href ='/Profile'>
               <Dropdown.Item>Profile</Dropdown.Item></a>
               <Dropdown.Item>Earnings</Dropdown.Item>

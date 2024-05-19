@@ -10,7 +10,8 @@
     "test": "npx cypress verify & cypress run --component"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.5",
+    "@preline/tabs": "^2.1.0",
+    "@reduxjs/toolkit": "^2.2.4",
     "cookies": "^0.9.1",
     "flowbite-react": "^0.9.0",
     "formik": "^2.4.6",

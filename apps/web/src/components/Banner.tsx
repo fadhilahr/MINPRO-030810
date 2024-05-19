@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <div>
         <section
-  className="relative bg-[url(https://img.freepik.com/free-photo/medium-shot-human-silhouettes-partying-together_23-2150039659.jpg?t=st=1715671013~exp=1715674613~hmac=4146294125288080eed1f2a8c89c800d315c1f3af0ee36797fab4da13404ab07&w=1060)] bg-cover bg-center bg-no-repeat"
+  className="relative bg-[url(https://images.pexels.com/photos/5935232/pexels-photo-5935232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] bg-cover bg-center bg-no-repeat"
 >
   <div
     className="absolute inset-0 bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"
