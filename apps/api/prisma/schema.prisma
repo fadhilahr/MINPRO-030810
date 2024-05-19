@@ -26,9 +26,11 @@ enum EventCategory {
 }
 
 enum TransactionStatus {
-  Pending
+ WaitingPayment
+  WaitingConfirmation
   Paid
-  Cancel
+  Cancelled
+  Declined
 }
 
 model User {
@@ -59,29 +61,31 @@ model Organizer {
 }
 
 model Event {
-  id               Int            @id @default(autoincrement())
+  id               Int           @id @default(autoincrement())
   name             String
   organizerId      Int
-  startSale        DateTime       @default(now())
-  eventDate        DateTime       @default(now())
+  startSale        DateTime      @default(now())
+  eventDate        DateTime      @default(now())
   status           EventStatus
   price            Int
-  slug             String         @db.LongText
+  slug             String        @db.LongText
   category         EventCategory
   city             String
   address          String
   availableTickets Int
-  description      String?        @db.LongText
-  organizer        Organizer      @relation(fields: [organizerId], references: [id])
+  description      String?       @db.LongText
+  organizer        Organizer     @relation(fields: [organizerId], references: [id])
   Transaction      Transaction[]
   Review           Review[]
   Promo            Promo[]
 }
+
 model Promo {
-  id        Int         @id @default(autoincrement())
-  eventId   Int
-  event     Event       @relation(fields: [eventId], references: [id])
-  PromoItem PromoItem[]
+  id          Int           @id @default(autoincrement())
+  eventId     Int
+  event       Event         @relation(fields: [eventId], references: [id])
+  PromoItem   PromoItem[]
+  Transaction Transaction[]
 }
 
 model PromoItem {
@@ -98,15 +102,20 @@ model Transaction {
   userId        Int
   eventId       Int
   quantity      Int
-  promoItemId   Int?
-  totalDiscount Int
+  promoId       Int?
+  useReferral   Boolean           @default(false)
+  PointUsed     Int?
+  totalDiscount Int?
   total         Int
   grandTotal    Int
   status        TransactionStatus
   imageUrl      String?
   createdAt     DateTime          @default(now())
+  paidAt        DateTime?
+  confirmedAt   DateTime?
   user          User              @relation(fields: [userId], references: [id])
   event         Event             @relation(fields: [eventId], references: [id])
+  promo         Promo?            @relation(fields: [promoId], references: [id])
 }
 
 model Review {

@@ -1,4 +1,4 @@
-import Card from "./Card/Card";
+import EventCard from "./Card/Card";
 
 export default function CarouselCard() {
     return (
@@ -12,7 +12,7 @@ export default function CarouselCard() {
     <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
       <div className="hs-carousel-slide">
         <div className="flex justify-center h-full bg-gray-100 p-6 dark:bg-neutral-900">
-          <Card/>
+          <EventCard/>
         </div>
       </div>
 

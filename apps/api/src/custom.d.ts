@@ -2,10 +2,8 @@ type Event = {
     id : number
 }
 
-declare namespace Express {
-    export interface Request {
-        event? : Event
-    }
+type Transaction = {
+    id : number
 }
 
 type User = {
@@ -17,5 +15,7 @@ type User = {
 declare namespace Express {
     export interface Request {
         user?: User
+        event? : Event
+        transaction ? : Transaction
     }
 }
