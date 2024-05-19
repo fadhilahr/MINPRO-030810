@@ -62,7 +62,6 @@ export default function page() {
       setImage(data)
     }
   }
-
   return (
     <div>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center bg-slate-900 w-full">
@@ -143,8 +142,6 @@ export default function page() {
 
     </div>
       
-  
-
       
       )
 }
