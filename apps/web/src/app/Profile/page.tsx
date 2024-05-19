@@ -74,51 +74,55 @@ const handleChange = () => {
           <div>
             <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
               <dl className="-my-3 divide-y divide-gray-100 text-sm">
-                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-slate-500">
-                  <dt className="font-medium text-gray-900">Title</dt>
-                  <dd className="text-gray-700 sm:col-span-2">Mr</dd>
+                
+
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-white">
+                  <dt className=" text-gray-900 text-3xl font-semibold">Name</dt>
+                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold ">{account?.name}</dd>
+                  <dt></dt>
+                  <dd> <a href="#" className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Change</a></dd>
                 </div>
 
-                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                  <dt className="font-medium text-gray-900">Name</dt>
-                  <dd className="text-gray-700 sm:col-span-2">{account?.name}</dd>
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-white">
+                  <dt className="text-3xl font-semibold text-gray-900">Email</dt>
+                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold">{account?.email}</dd>
+                  <dt></dt>
+                  <dd> <a href="#" className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Change</a></dd>
                 </div>
 
-                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-slate-500">
-                  <dt className="font-medium text-gray-900">Email</dt>
-                  <dd className="text-gray-700 sm:col-span-2">{account?.email}</dd>
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-white">
+                  <dt className="text-3xl font-semibold text-gray-900">Referral</dt>
+                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold">{account?.referral}</dd>
+                  <dt></dt>
+                  <dd> <a href="#" className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Change</a></dd>
                 </div>
 
-                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                  <dt className="font-medium text-gray-900">Point</dt>
-                  <dd className="text-gray-700 sm:col-span-2">{account?.id}</dd>
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-white">
+                  <dt className="text-3xl font-semibold text-gray-900">Point</dt>
+                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold">{account?.id}</dd>
+                  <dt></dt>
+                  <dd> <a href="#" className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Change</a></dd>
                 </div>
 
-                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-slate-500">
-                  <dt className="font-medium text-gray-900">Bio</dt>
-                  <dd className="text-gray-700 sm:col-span-2 ">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et facilis debitis explicabo
-                    doloremque impedit nesciunt dolorem facere, dolor quasi veritatis quia fugit aperiam
-                    aspernatur neque molestiae labore aliquam soluta architecto?
-                  </dd>
-                </div>
-                <div>
-                  <div className=" font-medium text-gray-900"></div>
-                  <dd className="text-gray-700 sm:col-span-2 bg-white">
-                    <div className="max-w-sm">
-                      <form>
-                        <label className="block">
+                <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-white">
+                  <dt className="text-3xl font-semibold text-gray-900">Profile Picture</dt>
+                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold ">{account?.image}</dd>
+                  <dt></dt>
+                  <dd>
+                  <label className="block">
                           <span className="sr-only">Choose profile photo</span>
                           <input  onChange={handleChange} type="file" ref={imageRef} className="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:disabled:opacity-50 file:disabled:pointer-events-none dark:text-neutral-500 dark:file:bg-blue-500 dark:hover:file:bg-blue-400 " />
                         </label>
-                        <div>
-                        <button onClick={handleImageSubmit} type="button" className="py-3 px-4 inline-flex gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-500 text-white hover:bg-gray-600 disabled:opacity-50 disabled:pointer-events-none">
-                          SAVE
-                        </button>
-                        </div>
-                      </form>
-                    </div>
                   </dd>
+                  
+                  
+                  
+                </div>
+                <div>
+                  <div className=" font-medium text-gray-900"></div>
+                  <button onClick={handleImageSubmit} type="button" className="py-3 px-4 inline-flex gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-500 text-white hover:bg-gray-600 disabled:opacity-50 disabled:pointer-events-none">
+                          SAVE
+                  </button>
                 </div>
               </dl>
             </div>
@@ -135,6 +139,7 @@ const handleChange = () => {
           />
         </div>
       </section>
+      
 
     </div>
   )

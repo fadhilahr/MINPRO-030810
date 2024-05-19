@@ -8,8 +8,8 @@ export default function Home() {
   return (
      <div className ='bg-slate-800'>
       <Banner />
-   {/* <Carousel /> */}
-   {/* <CarouselCard/> */}
+   <Carousel />
+   <CarouselCard/>
    </div>
 )
 }
