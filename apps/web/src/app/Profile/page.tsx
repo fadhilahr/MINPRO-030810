@@ -1,3 +1,4 @@
+
 'use client'
 import { setUser } from '@/lib/features/account/account'
 import { useAppDispatch, useAppSelector } from '@/lib/features/hooks'
@@ -96,7 +97,7 @@ export default function page() {
 
                 <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4 bg-white">
                   <dt className="text-3xl font-semibold text-gray-900">Point</dt>
-                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold">{account?.id}</dd>
+                  <dd className="text-gray-700 sm:col-span-2 text-3xl font-semibold">{new Intl.NumberFormat('en-DE').format(+account?.sumPoint!)}</dd>
                   <dt></dt>
                   <dd> <a href="#" className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">Change</a></dd>
                 </div>
@@ -122,8 +123,7 @@ export default function page() {
             </div>
             {account?.accountType}
           </div>
-
-        </div>
+          </div>
 
         <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
           <img
@@ -142,10 +142,6 @@ export default function page() {
 
     </div>
       
-  
-
-
-  )
+      
+      )
 }
-
-

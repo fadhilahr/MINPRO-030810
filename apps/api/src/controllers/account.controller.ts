@@ -6,12 +6,20 @@ import prisma from '@/prisma';
 export class AccountController {
        
     async verifyAccount(req: Request, res: Response) {
+        const d = new Date();
+        d.setHours(0)
+        d.setMinutes(0)
+        d.setSeconds(0)
+        d.setMilliseconds(0)
+        const expireDate = d.setMonth(d.getMonth() + 3);
         try {
             if (req.user?.accountType == "user") {
                 if (req.user?.refCode !== undefined) {
                     await prisma.user.update({
                         data: {
-                           isReedem: false
+                           isReedem: false,
+                           isActive: true,
+                           RedeemExpire: new Date(expireDate)
                         },
                         where: {
                             id: req.user?.id
@@ -24,6 +32,35 @@ export class AccountController {
                     },
                     where: {
                         id: req.user?.id
+                    }
+                })
+
+                await prisma.pointUser.create({
+                    data:{
+                        userId: req.user?.userId!,
+                        expireAt: new Date(expireDate)
+                    }
+                })
+                const userPoint = await prisma.pointUser.aggregate({
+                    where: {
+                        userId: req.user?.id,
+                        isRedeem: false
+                    },
+                    _sum: {
+                        point: true
+                    },
+                    _min: {
+                        expireAt: true
+                    }
+                })
+                const expireSoonPoint = await prisma.pointUser.aggregate({
+                    where: {
+                        expireAt: new Date(userPoint._min?.expireAt!),
+                        isRedeem: false,
+                        userId: user.id
+                    },
+                    _sum: {
+                        point: true
                     }
                 })
                 const payload = {id: user.id, accountType: user.accountType}
